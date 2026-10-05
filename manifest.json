@@ -1,0 +1,15 @@
+{
+  "name": "Rekor Kır",
+  "short_name": "RekorKır",
+  "description": "Mobilde kullanım rekorlarını kır.",
+  "lang": "tr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f0f1a",
+  "theme_color": "#0f0f1a",
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

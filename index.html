@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#0f0f1a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="Mobilde kullanım rekorlarını kır: oturum süresi, seri, dokunma ve refleks rekorları.">
+  <title>Rekor Kır</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Rekor<span>Kır</span></h1>
+    <div class="streak" id="streakBadge" title="Günlük seri">🔥 <b id="streakNow">0</b></div>
+  </header>
+
+  <main>
+    <!-- OTURUM -->
+    <section class="view active" id="view-session">
+      <div class="ring-wrap">
+        <svg class="ring" viewBox="0 0 200 200" aria-hidden="true">
+          <circle cx="100" cy="100" r="88" class="ring-bg"/>
+          <circle cx="100" cy="100" r="88" class="ring-fg" id="ringFg"/>
+        </svg>
+        <div class="ring-center">
+          <div class="label">Bu oturum</div>
+          <div class="big" id="sessionTime">00:00</div>
+          <div class="sub" id="sessionGoal">Rekor: 00:00</div>
+        </div>
+      </div>
+
+      <div class="cards">
+        <div class="card"><div class="k">Bugün toplam</div><div class="v" id="todayTotal">0 dk</div></div>
+        <div class="card"><div class="k">Günlük rekor</div><div class="v" id="bestDay">0 dk</div></div>
+        <div class="card"><div class="k">Tüm zamanlar</div><div class="v" id="allTotal">0 dk</div></div>
+        <div class="card"><div class="k">En uzun seri</div><div class="v" id="bestStreak">0 gün</div></div>
+      </div>
+
+      <p class="hint">Uygulama ekrandayken süre işler. Başka uygulamaya geçersen oturum durur; 30 saniye içinde dönersen kaldığı yerden devam eder.</p>
+
+      <h2>Son 7 gün</h2>
+      <div class="week" id="weekChart"></div>
+    </section>
+
+    <!-- OYUNLAR -->
+    <section class="view" id="view-games">
+      <div class="game" id="tapGame">
+        <div class="game-head">
+          <h2>⚡ Hızlı Dokun</h2>
+          <div class="pb">Rekor: <b id="tapBest">0</b></div>
+        </div>
+        <p class="muted">10 saniyede kaç kez dokunabilirsin?</p>
+        <button class="pad" id="tapPad" type="button">
+          <span class="pad-main" id="tapMain">BAŞLA</span>
+          <span class="pad-sub" id="tapSub">Dokunarak başlat</span>
+        </button>
+      </div>
+
+      <div class="game" id="reactGame">
+        <div class="game-head">
+          <h2>🎯 Refleks</h2>
+          <div class="pb">Rekor: <b id="reactBest">—</b></div>
+        </div>
+        <p class="muted">Ekran yeşile döndüğü an dokun.</p>
+        <button class="pad react" id="reactPad" type="button">
+          <span class="pad-main" id="reactMain">BAŞLA</span>
+          <span class="pad-sub" id="reactSub">Dokunarak başlat</span>
+        </button>
+      </div>
+
+      <div class="game" id="holdGame">
+        <div class="game-head">
+          <h2>✋ Bırakma</h2>
+          <div class="pb">Rekor: <b id="holdBest">0.0 sn</b></div>
+        </div>
+        <p class="muted">Parmağını basılı tut. Kaydırırsan ya da bırakırsan biter.</p>
+        <div class="pad hold" id="holdPad" role="button" tabindex="0">
+          <span class="pad-main" id="holdMain">BAS ve TUT</span>
+          <span class="pad-sub" id="holdSub">&nbsp;</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- REKORLAR -->
+    <section class="view" id="view-records">
+      <h2>Rekorların</h2>
+      <ul class="records" id="recordList"></ul>
+
+      <h2>Rozetler</h2>
+      <div class="badges" id="badgeList"></div>
+
+      <button class="danger" id="resetBtn" type="button">Tüm verileri sıfırla</button>
+    </section>
+  </main>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab active" data-view="session" type="button"><span>⏱️</span>Oturum</button>
+    <button class="tab" data-view="games" type="button"><span>🎮</span>Oyunlar</button>
+    <button class="tab" data-view="records" type="button"><span>🏆</span>Rekorlar</button>
+  </nav>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <canvas id="confetti" aria-hidden="true"></canvas>
+
+  <script src="app.js"></script>
+</body>
+</html>
